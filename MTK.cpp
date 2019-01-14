@@ -70,9 +70,35 @@ void BacCaoNhat(int a[][100], int n){
 	cout<<"Dinh co bac cao nhat la: "<< Bmax<<endl;
 }
 
-void LienThong(int a[][100], int n){
-	bool lienthong = true;
-	
+bool LienThong(int a[][100], int n){
+	bool lienthong = 0;
+	int tmp[20];
+	for(int i=0; i<n; i++){
+		tmp[i] =0;
+	}
+	int count=0;
+	tmp[count++] = 1;
+	do
+	{
+		lienthong =1;
+		for(int i=0; i< n; i++){
+			if(tmp[i] == 1){
+				for(int k=0; k< n; k++){
+					if(tmp[k] == 0 && a[i][k] > 0){
+						cout<<i+1<<" ";
+						tmp[k] =1;
+						lienthong =0;
+						count++;
+						if(count == n){
+							return true;
+						}
+					}
+				}		
+			}
+		}
+	} while(lienthong == 0);
+	cout<<endl;
+	return false;
 	
 }
 int main()
@@ -87,5 +113,7 @@ int main()
 	cout<<"\n\n";
 
 	BacCaoNhat(a, n);
+	cout<<"\n\n";
+	cout<<"\n\n"<<LienThong(a, n)<<endl;
 	return 0;
 }
